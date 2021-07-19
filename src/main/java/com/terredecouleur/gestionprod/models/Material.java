@@ -3,12 +3,15 @@ package com.terredecouleur.gestionprod.models;
 import java.io.Serializable;
 import java.util.Calendar;
 
+import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+@Entity
 public class Material implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
@@ -27,13 +30,15 @@ public class Material implements Serializable{
 	private Double priceKg;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "provider_id")
 	private Provider provider;
 	
 	public Material() {
 	}
 
 	public Material(Integer id, String numberLot, String designation, String tradeName, Calendar dateManufacture,
-			Calendar dateExpiry, Double stockProduction, Double stockActual, Double quatityProd, Double priceKg) {
+			Calendar dateExpiry, Double stockProduction, Double stockActual, Double quatityProd, Double priceKg,
+			Provider provider) {
 		this.id = id;
 		this.numberLot = numberLot;
 		this.designation = designation;
@@ -44,6 +49,7 @@ public class Material implements Serializable{
 		this.stockActual = stockActual;
 		this.quatityProd = quatityProd;
 		this.priceKg = priceKg;
+		this.provider = provider;
 	}
 
 	public Integer getId() {

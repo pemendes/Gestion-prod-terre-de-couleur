@@ -1,15 +1,11 @@
 package com.terredecouleur.gestionprod.models;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Provider implements Serializable{
@@ -22,10 +18,6 @@ public class Provider implements Serializable{
 	private String name;
 	private String address;
 	private String cp;
-	
-	@OneToMany(mappedBy = "provider")
-	@JoinColumn(name = "provider_id")
-	private List<Material> materials = new ArrayList<>();
 	
 	public Provider() {	
 	}
@@ -67,14 +59,6 @@ public class Provider implements Serializable{
 
 	public void setCp(String cp) {
 		this.cp = cp;
-	}
-
-	public List<Material> getMaterials() {
-		return materials;
-	}
-
-	public void setMaterials(List<Material> materials) {
-		this.materials = materials;
 	}
 
 	@Override
