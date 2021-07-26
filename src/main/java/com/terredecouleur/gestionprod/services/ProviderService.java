@@ -1,5 +1,6 @@
 package com.terredecouleur.gestionprod.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,10 @@ public class ProviderService {
 	public Provider findProviderById(Integer id) {
 		Optional<Provider> provider = repo.findById(id);
 		return provider.orElseThrow(()->new ObjectNotFoundException("Objet non trouvé! Id: " + id + ", type: " + Provider.class.getName()));	
+	}
+	
+	public List<Provider> findAll() {
+		return repo.findAll();
 	}
 	
 	public Provider insert(Provider provider) {

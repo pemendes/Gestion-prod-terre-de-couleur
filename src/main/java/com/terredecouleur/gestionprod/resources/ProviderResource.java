@@ -1,6 +1,7 @@
 package com.terredecouleur.gestionprod.resources;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,12 @@ public class ProviderResource {
 	public ResponseEntity<Provider> findProviderById(@PathVariable Integer id) {
 		Provider provider = service.findProviderById(id);
 		return ResponseEntity.ok().body(provider);
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public ResponseEntity<List<Provider>> findAll() {
+		List<Provider> list = service.findAll();
+		return ResponseEntity.ok().body(list);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
