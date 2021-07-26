@@ -19,5 +19,10 @@ public class CompositionService {
 		Optional<Composition> composition = repo.findById(id);
 		return composition.orElseThrow(()->new ObjectNotFoundException("Objet non trouvé! Id: " + id + ", type: " + Composition.class.getName()));
 	}
+	
+	public Composition insert(Composition composition) {
+		composition.setId(null);
+		return repo.save(composition);
+	}
 
 }

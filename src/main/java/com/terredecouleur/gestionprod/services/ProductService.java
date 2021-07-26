@@ -19,4 +19,9 @@ public class ProductService {
 		Optional<Product> product = repo.findById(id);
 		return product.orElseThrow(()->new ObjectNotFoundException("Objet non trouvé! Id: " + id + ", type: " + Product.class.getName()));	
 	}
+	
+	public Product insert(Product product) {
+		product.setId(null);
+		return repo.save(product);
+	}
 }

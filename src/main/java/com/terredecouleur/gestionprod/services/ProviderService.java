@@ -19,5 +19,9 @@ public class ProviderService {
 		Optional<Provider> provider = repo.findById(id);
 		return provider.orElseThrow(()->new ObjectNotFoundException("Objet non trouvé! Id: " + id + ", type: " + Provider.class.getName()));	
 	}
-
+	
+	public Provider insert(Provider provider) {
+		provider.setId(null);
+		return repo.save(provider);
+	}
 }
