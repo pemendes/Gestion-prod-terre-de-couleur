@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Composition implements Serializable{
@@ -29,7 +29,7 @@ public class Composition implements Serializable{
 	@JoinColumn(name="material_id")
 	private Material material;
 	
-	@JsonBackReference
+	@JsonIgnore
 	@ManyToMany(mappedBy="compositions")
 	private List<Product> products = new ArrayList<>();
 	
