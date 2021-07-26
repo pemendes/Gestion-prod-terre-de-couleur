@@ -22,7 +22,7 @@ public class ProductResource {
 	private ProductService service;
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> findProductById(@PathVariable Integer id) {
+	public ResponseEntity<Product> findProductById(@PathVariable Integer id) {
 		Product product = service.findProductById(id);
 		return ResponseEntity.ok().body(product);
 	}

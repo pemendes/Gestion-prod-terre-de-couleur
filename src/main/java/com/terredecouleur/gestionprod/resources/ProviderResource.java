@@ -22,7 +22,7 @@ public class ProviderResource {
 	private ProviderService service;
 
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> findProviderById(@PathVariable Integer id) {
+	public ResponseEntity<Provider> findProviderById(@PathVariable Integer id) {
 		Provider provider = service.findProviderById(id);
 		return ResponseEntity.ok().body(provider);
 	}
@@ -34,5 +34,12 @@ public class ProviderResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(provider.getId()).toUri(); 
 		return ResponseEntity.created(uri).build();
+	}
+	
+	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Provider> update(@RequestBody Provider provider, @PathVariable Integer id) {
+		provider.setId(id);
+		provider = service.update(provider);
+		return ResponseEntity.noContent().build();
 	}
 }

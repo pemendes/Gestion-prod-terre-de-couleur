@@ -22,7 +22,7 @@ public class MaterialResource {
 	MaterialService service;
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> findMaterialById(@PathVariable Integer id) {
+	public ResponseEntity<Material> findMaterialById(@PathVariable Integer id) {
 		Material material = service.findMaterialById(id);
 		return ResponseEntity.ok().body(material);	
 	}

@@ -24,4 +24,9 @@ public class ProviderService {
 		provider.setId(null);
 		return repo.save(provider);
 	}
+	
+	public Provider update(Provider provider) {
+		findProviderById(provider.getId());
+		return repo.save(provider);
+	}
 }

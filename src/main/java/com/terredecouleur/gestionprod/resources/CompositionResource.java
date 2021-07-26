@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.terredecouleur.gestionprod.models.Composition;
-import com.terredecouleur.gestionprod.models.Provider;
 import com.terredecouleur.gestionprod.services.CompositionService;
 
 @RestController
@@ -23,7 +22,7 @@ public class CompositionResource {
 	private CompositionService service;
 
 	@RequestMapping(value="/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> findCompositionById(@PathVariable Integer id) {
+	public ResponseEntity<Composition> findCompositionById(@PathVariable Integer id) {
 		Composition composition = service.findCompositionById(id);
 		return ResponseEntity.ok().body(composition);
 	}
