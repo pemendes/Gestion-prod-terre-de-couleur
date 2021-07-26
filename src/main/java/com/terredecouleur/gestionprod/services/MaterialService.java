@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.terredecouleur.gestionprod.models.Material;
 import com.terredecouleur.gestionprod.repositories.MaterialRepository;
+import com.terredecouleur.gestionprod.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class MaterialService {
@@ -16,6 +17,6 @@ public class MaterialService {
 	
 	public Material findMaterialById(Integer id) {
 		Optional<Material> material = repo.findById(id);
-		return material.orElse(null);	
+		return material.orElseThrow(()->new ObjectNotFoundException("Objet non trouvé! Id: " + id + ", type: " + Material.class.getName()));	
 	}
 }

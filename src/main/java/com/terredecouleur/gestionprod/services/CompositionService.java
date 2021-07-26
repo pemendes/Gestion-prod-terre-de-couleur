@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.terredecouleur.gestionprod.models.Composition;
 import com.terredecouleur.gestionprod.repositories.CompositionRepository;
+import com.terredecouleur.gestionprod.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class CompositionService {
@@ -16,7 +17,7 @@ public class CompositionService {
 	
 	public Composition findCompositionById(Integer id) {
 		Optional<Composition> composition = repo.findById(id);
-		return composition.orElse(null);
+		return composition.orElseThrow(()->new ObjectNotFoundException("Objet non trouvé! Id: " + id + ", type: " + Composition.class.getName()));
 	}
 
 }

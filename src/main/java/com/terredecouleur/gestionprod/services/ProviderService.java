@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.terredecouleur.gestionprod.models.Provider;
 import com.terredecouleur.gestionprod.repositories.ProviderRepository;
+import com.terredecouleur.gestionprod.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ProviderService {
@@ -16,7 +17,7 @@ public class ProviderService {
 	
 	public Provider findProviderById(Integer id) {
 		Optional<Provider> provider = repo.findById(id);
-		return provider.orElse(null);
+		return provider.orElseThrow(()->new ObjectNotFoundException("Objet non trouvé! Id: " + id + ", type: " + Provider.class.getName()));	
 	}
 
 }
