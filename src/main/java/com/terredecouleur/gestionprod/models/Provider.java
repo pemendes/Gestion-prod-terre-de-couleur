@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+
+import org.hibernate.validator.constraints.Length;
 
 @Entity
 public class Provider implements Serializable{
@@ -14,8 +17,11 @@ public class Provider implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
+	@NotEmpty(message="Ce champ ne peut pas être vide")
+	@Length(min=5, max=80, message="La taille doit être comprise entre 5 et 80 caractères")
 	private String name;
+	
 	private String address;
 	private String cp;
 	

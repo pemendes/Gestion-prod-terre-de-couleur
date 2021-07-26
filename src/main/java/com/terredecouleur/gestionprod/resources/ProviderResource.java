@@ -3,6 +3,8 @@ package com.terredecouleur.gestionprod.resources;
 import java.net.URI;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +39,7 @@ public class ProviderResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Provider provider) {
+	public ResponseEntity<Void> insert(@Valid @RequestBody Provider provider) {
 		provider = service.insert(provider);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -46,7 +48,7 @@ public class ProviderResource {
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.PUT)
-	public ResponseEntity<Provider> update(@RequestBody Provider provider, @PathVariable Integer id) {
+	public ResponseEntity<Provider> update(@Valid @RequestBody Provider provider, @PathVariable Integer id) {
 		provider.setId(id);
 		provider = service.update(provider);
 		return ResponseEntity.noContent().build();
