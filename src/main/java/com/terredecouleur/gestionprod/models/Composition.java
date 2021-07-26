@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Composition implements Serializable{
@@ -24,10 +25,11 @@ public class Composition implements Serializable{
 	private Double quantity;
 	private Double percentage;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="material_id")
 	private Material material;
 	
+	@JsonBackReference
 	@ManyToMany(mappedBy="compositions")
 	private List<Product> products = new ArrayList<>();
 	

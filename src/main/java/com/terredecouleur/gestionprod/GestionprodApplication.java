@@ -8,9 +8,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.terredecouleur.gestionprod.models.Composition;
 import com.terredecouleur.gestionprod.models.Material;
+import com.terredecouleur.gestionprod.models.Product;
 import com.terredecouleur.gestionprod.models.Provider;
+import com.terredecouleur.gestionprod.repositories.CompositionRepository;
 import com.terredecouleur.gestionprod.repositories.MaterialRepository;
+import com.terredecouleur.gestionprod.repositories.ProductRepository;
 import com.terredecouleur.gestionprod.repositories.ProviderRepository;
 
 @SpringBootApplication
@@ -20,6 +24,10 @@ public class GestionprodApplication implements CommandLineRunner {
 	private ProviderRepository providerRepo;
 	@Autowired
 	private MaterialRepository materialRepo;
+	@Autowired
+	CompositionRepository compositionRepo;
+	@Autowired
+	ProductRepository productRepo;
 
 	public static void main(String[] args) {
 		SpringApplication.run(GestionprodApplication.class, args);
@@ -37,10 +45,24 @@ public class GestionprodApplication implements CommandLineRunner {
 				Calendar.getInstance(), 20.00, 20.00, 0.00, 3.95, p2);
 		Material mat3 = new Material(null, "FFRRD12", "Torrimus 443", "Torrimus", Calendar.getInstance(), 
 				Calendar.getInstance(), 25.00, 25.00, 0.00, 5.95, p1);
+		
+		Composition c1 = new Composition(null, 5.00, 3.00, mat1);
+		Composition c2 = new Composition(null, 10.00, 2.00, mat2);
+		Composition c3 = new Composition(null, 6.00, 4.00, mat3);
+		
+		Product prod = new Product(null, "TEX001", "Baum fom", Calendar.getInstance(), 
+				Calendar.getInstance(), 15.00, "Rien à signaler", "Rien à signaler");
+		prod.setCompositions(Arrays.asList(c1, c2));
+		
+		Product prod1 = new Product(null, "TEX002", "Champoing fom", Calendar.getInstance(), 
+				Calendar.getInstance(), 6.00, "Rien à signaler", "Rien à signaler");
+		prod1.setCompositions(Arrays.asList(c3));
 			
 		
 		providerRepo.saveAll(Arrays.asList(p1, p2, p3));
 		materialRepo.saveAll(Arrays.asList(mat1, mat2, mat3));
+		compositionRepo.saveAll(Arrays.asList(c1, c2, c3));
+		productRepo.saveAll(Arrays.asList(prod, prod1));
 	}
 
 }

@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +28,7 @@ public class Material implements Serializable{
 	private Double quatityProd;
 	private Double priceKg;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name = "provider_id")
 	private Provider provider;
 	
