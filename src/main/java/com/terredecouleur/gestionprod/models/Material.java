@@ -23,7 +23,7 @@ public class Material implements Serializable{
 	private String tradeName;
 	private Calendar dateManufacture;
 	private Calendar dateExpiry;
-	private Double StockProduction;
+	private Double stockProduction;
 	private Double stockActual;
 	private Double quatityProd;
 	private Double priceKg;
@@ -44,7 +44,7 @@ public class Material implements Serializable{
 		this.tradeName = tradeName;
 		this.dateManufacture = dateManufacture;
 		this.dateExpiry = dateExpiry;
-		StockProduction = stockProduction;
+		this.stockProduction = stockProduction;
 		this.stockActual = stockActual;
 		this.quatityProd = quatityProd;
 		this.priceKg = priceKg;
@@ -100,11 +100,11 @@ public class Material implements Serializable{
 	}
 
 	public Double getStockProduction() {
-		return StockProduction;
+		return stockProduction;
 	}
 
 	public void setStockProduction(Double stockProduction) {
-		StockProduction = stockProduction;
+		this.stockProduction = stockProduction;
 	}
 
 	public Double getStockActual() {
