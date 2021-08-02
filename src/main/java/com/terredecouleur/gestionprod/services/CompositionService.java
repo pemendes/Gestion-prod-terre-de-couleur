@@ -42,13 +42,19 @@ public class CompositionService {
 	
 	@Transactional
 	public Composition insert(Composition composition) {
-		composition.setId(null);
-		composition =  repo.save(composition);
 		Material mat = composition.getMaterial();
-		mat.setStockActual(mat.getStockActual() - composition.getQuantity());
-		mat.setQuatityProd(mat.getQuatityProd() + composition.getQuantity());
-		matService.update(mat);
-		return composition;
+		if (mat.getStockActual() >= composition.getQuantity()) {
+			composition.setId(null);
+			composition =  repo.save(composition);
+			
+			mat.setStockActual(mat.getStockActual() - composition.getQuantity());
+			mat.setQuatityProd(mat.getQuatityProd() + composition.getQuantity());
+			matService.update(mat);
+			return composition;
+		} else {
+			throw new ObjectNotFoundException("Le stock de " + mat.getTradeName() + " est insufisant!");
+		}
+		
 	}
 	
 	public Composition update(Composition obj) {
