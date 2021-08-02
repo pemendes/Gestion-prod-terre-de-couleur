@@ -83,5 +83,9 @@ public class MaterialService {
 		newObj.setTradeName(obj.getTradeName());
 		newObj.setDateManufacture(obj.getDateManufacture());
 		newObj.setDateExpiry(obj.getDateExpiry());
+		
+		if (newObj.getStockProduction() < 0) {
+			newObj.setStockProduction(obj.getStockProduction());
+		}
 	}
 }

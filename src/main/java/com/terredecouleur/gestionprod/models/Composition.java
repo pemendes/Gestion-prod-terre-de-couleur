@@ -23,7 +23,6 @@ public class Composition implements Serializable{
 	private Integer id;
 	
 	private Double quantity;
-	private Double percentage;
 	
 	@ManyToOne
 	@JoinColumn(name="material_id")
@@ -36,11 +35,10 @@ public class Composition implements Serializable{
 	public Composition() {
 	}
 	
-	public Composition(Integer id, Double quantity, Double percentage, Material material) {
+	public Composition(Integer id, Double quantity, Material material) {
 		super();
 		this.id = id;
 		this.quantity = quantity;
-		this.percentage = percentage;
 		this.material = material;
 	}
 
@@ -58,14 +56,6 @@ public class Composition implements Serializable{
 
 	public void setQuantity(Double quantity) {
 		this.quantity = quantity;
-	}
-
-	public Double getPercentage() {
-		return percentage;
-	}
-
-	public void setPercentage(Double percentage) {
-		this.percentage = percentage;
 	}
 
 	public Material getMaterial() {

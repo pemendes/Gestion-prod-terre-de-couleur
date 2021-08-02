@@ -107,5 +107,4 @@ public class MaterialDTO implements Serializable{
 	public void setPriceKg(Double priceKg) {
 		this.priceKg = priceKg;
 	}
-
 }

@@ -45,10 +45,12 @@ public class GestionprodApplication implements CommandLineRunner {
 				Calendar.getInstance(), 20.00, 20.00, 0.00, 3.95, p2);
 		Material mat3 = new Material(null, "FFRRD12", "Torrimus 443", "Torrimus", Calendar.getInstance(), 
 				Calendar.getInstance(), 25.00, 25.00, 0.00, 5.95, p1);
+		Material mat4 = new Material(null, "001FFRRD12", "Astrazeneca 443", "Astraz", Calendar.getInstance(), 
+				Calendar.getInstance(), 25.00, 25.00, 0.00, 5.95, null);
 		
-		Composition c1 = new Composition(null, 5.00, 3.00, mat1);
-		Composition c2 = new Composition(null, 10.00, 2.00, mat2);
-		Composition c3 = new Composition(null, 6.00, 4.00, mat3);
+		Composition c1 = new Composition(null, 5.00, mat1);
+		Composition c2 = new Composition(null, 10.00, mat2);
+		Composition c3 = new Composition(null, 6.00, mat3);
 		
 		Product prod = new Product(null, "TEX001", "Baum fom", Calendar.getInstance(), 
 				Calendar.getInstance(), 15.00, "Rien à signaler", "Rien à signaler");
@@ -60,7 +62,7 @@ public class GestionprodApplication implements CommandLineRunner {
 			
 		
 		providerRepo.saveAll(Arrays.asList(p1, p2, p3));
-		materialRepo.saveAll(Arrays.asList(mat1, mat2, mat3));
+		materialRepo.saveAll(Arrays.asList(mat1, mat2, mat3, mat4));
 		compositionRepo.saveAll(Arrays.asList(c1, c2, c3));
 		productRepo.saveAll(Arrays.asList(prod, prod1));
 	}
