@@ -53,8 +53,7 @@ public class CompositionService {
 			return composition;
 		} else {
 			throw new ObjectNotFoundException("Le stock de " + mat.getTradeName() + " est insufisant!");
-		}
-		
+		}	
 	}
 	
 	public Composition update(Composition obj) {
