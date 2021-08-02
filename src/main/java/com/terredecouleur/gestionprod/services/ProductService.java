@@ -17,7 +17,6 @@ import com.terredecouleur.gestionprod.dto.ProductNewDTO;
 import com.terredecouleur.gestionprod.models.Composition;
 import com.terredecouleur.gestionprod.models.Material;
 import com.terredecouleur.gestionprod.models.Product;
-import com.terredecouleur.gestionprod.repositories.CompositionRepository;
 import com.terredecouleur.gestionprod.repositories.ProductRepository;
 import com.terredecouleur.gestionprod.services.exceptions.DataIntegrityException;
 import com.terredecouleur.gestionprod.services.exceptions.ObjectNotFoundException;
@@ -32,7 +31,7 @@ public class ProductService {
 	private MaterialService matService;
 	
 	@Autowired
-	CompositionRepository compositionRepo;
+	CompositionService compService;
 	
 	public Product findProductById(Integer id) {
 		Optional<Product> product = repo.findById(id);
@@ -46,19 +45,9 @@ public class ProductService {
 	@Transactional
 	public Product insert(Product product) {
 		product.setId(null);
-		product = repo.save(product);
-		
+		product = repo.save(product);	
 		for (Composition comp : product.getCompositions()) {
-			Material mat = comp.getMaterial();
-			if (mat.getStockActual() >= comp.getQuantity()) {
-				comp.setId(null);
-				compositionRepo.save(comp);
-				mat.setStockActual(mat.getStockActual() - comp.getQuantity());
-				mat.setQuatityProd(mat.getQuatityProd() + comp.getQuantity());
-				matService.update(mat);
-			} else {
-				throw new ObjectNotFoundException("Le stock de " + mat.getTradeName() + " est insufisant!");
-			}	
+			compService.insert(comp);
 		}
 		return product;
 	}

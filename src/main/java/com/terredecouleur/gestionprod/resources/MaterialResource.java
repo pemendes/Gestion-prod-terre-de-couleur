@@ -74,5 +74,4 @@ public class MaterialResource {
 		  
 		return ResponseEntity.ok().body(list);
 	}
-
 }

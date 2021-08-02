@@ -16,6 +16,7 @@ import com.terredecouleur.gestionprod.models.Composition;
 import com.terredecouleur.gestionprod.models.Material;
 import com.terredecouleur.gestionprod.repositories.CompositionRepository;
 import com.terredecouleur.gestionprod.repositories.MaterialRepository;
+import com.terredecouleur.gestionprod.repositories.ProviderRepository;
 import com.terredecouleur.gestionprod.services.exceptions.DataIntegrityException;
 import com.terredecouleur.gestionprod.services.exceptions.ObjectNotFoundException;
 
@@ -30,6 +31,9 @@ public class CompositionService {
 	
 	@Autowired
 	private MaterialService matService;
+	
+	@Autowired
+	ProviderRepository providerRepo;
 	
 	public Composition findCompositionById(Integer id) {
 		Optional<Composition> composition = repo.findById(id);
@@ -46,10 +50,10 @@ public class CompositionService {
 		if (mat.getStockActual() >= composition.getQuantity()) {
 			composition.setId(null);
 			composition =  repo.save(composition);
-			
 			mat.setStockActual(mat.getStockActual() - composition.getQuantity());
 			mat.setQuatityProd(mat.getQuatityProd() + composition.getQuantity());
 			matService.update(mat);
+			
 			return composition;
 		} else {
 			throw new ObjectNotFoundException("Le stock de " + mat.getTradeName() + " est insufisant!");
@@ -82,11 +86,8 @@ public class CompositionService {
 	}
 	
 	public Composition fromNewDTO(CompositionDTO objNewDto) {
-		// Material mat = new Material(objNewDto.getMaterialId(), null, null, null, null, null, null, null, null, null, null);
 		Material mat = matService.findMaterialById(objNewDto.getMaterialId());
 		Composition Composition = new Composition(null, objNewDto.getQuantity(), mat);
-		// mat.setStockActual(mat.getStockActual() - objNewDto.getQuantity());
-		// mat.setQuatityProd(mat.getQuatityProd() + objNewDto.getQuantity());
 		return Composition;
 	}
 	
